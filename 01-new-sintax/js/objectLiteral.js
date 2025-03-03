@@ -1,5 +1,6 @@
 // 01. Object property initializer shorthand
-// ES5
+
+// ES5 way of defining an object with properties
 function createMachine1(name, status) {
   return {
     name: name,
@@ -7,7 +8,7 @@ function createMachine1(name, status) {
   };
 }
 
-// ES6
+// ES6 way of defining an object with shorthand property names
 function createMachine2(name, status) {
   return {
     name,
@@ -15,31 +16,34 @@ function createMachine2(name, status) {
   };
 }
 
-console.log(createMachine1("Machine 1", "on"));
-console.log(createMachine2("Machine 2", "on"));
+console.log(createMachine1("Machine 1", "on")); // Output: { name: 'Machine 1', status: 'on' }
+console.log(createMachine2("Machine 2", "on")); // Output: { name: 'Machine 2', status: 'on' }
 
-// Computed property name
-// ES5
+// 02. Computed property name
+
+// ES5 way of defining an object with computed property names
 let name = "Machine 3";
 let machine = {
-  [name]: "server",
-  "machine Hour": 1000,
+  [name]: "server",         // Use variable 'name' as the key
+  "machine Hour": 1000,     // Property name with space
 };
 
-console.log(machine[name]);
-console.log(machine["machine Hour"]);
+console.log(machine[name]); // Output: "server"
+console.log(machine["machine Hour"]); // Output: 1000
 
+// Using a prefix to create computed property names
 let prefix = "machine";
 let machine2 = {
-  [prefix + " name"]: "server",
-  [prefix + " Hour"]: 1000,
+  [prefix + " name"]: "server", // Compute property name using prefix
+  [prefix + " Hour"]: 1000,     // Compute property name using prefix
 };
 
-console.log(machine2["machine name"]);
-console.log(machine2["machine Hour"]);
+console.log(machine2["machine name"]); // Output: "server"
+console.log(machine2["machine Hour"]); // Output: 1000
 
 // 03. Concise method syntax
-// ES5
+
+// ES5 way of defining a method in an object
 let server = {
   name: "server",
   restart: function () {
@@ -47,8 +51,9 @@ let server = {
   },
 };
 
-server.restart();
+server.restart(); // Output: "the server is restarting"
 
+// ES6 way of defining a method in an object with concise syntax
 let server2 = {
   name: "server",
   restart() {
@@ -56,4 +61,4 @@ let server2 = {
   },
 };
 
-server2.restart();
+server2.restart(); // Output: "the server is restarting"

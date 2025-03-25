@@ -1,5 +1,4 @@
 // conth dengan ES5
-
 function Animal(legs) {
   this.legs = legs;
 }
@@ -15,55 +14,41 @@ function Bird(legs) {
 Bird.prototype = Object.create(Animal.prototype);
 Bird.prototype.constructor = Animal;
 
-Bird.prototype.fly = function () {
-  console.log("flying");
+// Menambahkan metode khusus untuk Bird
+Bird.prototype.fly = function() {
+  console.log("Flying with " + this.legs + " legs");
 };
 
-var pigeon = new Bird(2);
-pigeon.walk();
-pigeon.fly();
+// Menambahkan method static pada Animal
+Animal.isAnimal = function(obj) {
+  return obj instanceof Animal;
+};
 
-// contoh dengan ES6
-class Animal2 {
-  constructor(legs) {
-    this.legs = legs;
-  }
+// Membuat instance dan menguji metode
+let myAnimal = new Animal(4);
+myAnimal.walk();
 
-  walk() {
-    console.log(`walking on ${this.legs} legs`);
-  }
+let myBird = new Bird(2);
+myBird.walk();
+myBird.fly();
+
+console.log(Animal.isAnimal(myAnimal)); // true
+console.log(Animal.isAnimal(myBird));   // true
+
+// Contoh pewarisan tambahan dengan ES5
+function Mammal(legs, furColor) {
+  Animal.call(this, legs);
+  this.furColor = furColor;
 }
 
-class Bird2 extends Animal2 {
-  constructor(legs, color) {
-    super(legs);
-    this.color = color;
-  }
+Mammal.prototype = Object.create(Animal.prototype);
+Mammal.prototype.constructor = Mammal;
 
-  fly() {
-    console.log("flying");
-  }
+Mammal.prototype.makeSounds = function() {
+  console.log("Making mammal sounds");
+};
 
-  getColor() {
-    return this.color;
-  }
-}
-
-let bird2 = new Bird2(2, "red");
-bird2.walk();
-bird2.fly();
-console.log(bird2.getColor());
-
-class Dog extends Animal2 {
-  constructor() {
-    super(4);
-  }
-
-  walk() {
-    super.walk();
-    console.log("I can walk");
-  }
-}
-
-let dog = new Dog();
+let dog = new Mammal(4, "brown");
 dog.walk();
+dog.makeSounds();
+console.log(dog.furColor);

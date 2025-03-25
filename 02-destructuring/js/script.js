@@ -1,4 +1,3 @@
-// DESTRUCTURING ARRAY
 function getSecore() {
   return [70, 80, 90];
 }
@@ -25,14 +24,13 @@ let [i, ...rest] = getSecore();
 console.log(i, rest);
 
 let items = getSecore();
-let ke4 = items[3] != undefined ? items[3] : 0;
-ke4 = items[4] || 0;
+let ke4 = items[3] ?? 0;
 console.log(ke4);
 
 [a, b, c, d = 0, e = 0] = getSecore();
 console.log(a, b, c, d, e);
 
-[a = 10, b = 20] = null || [];
+[a = 10, b = 20] = [];
 console.log(a, b);
 
 function getProfile() {
@@ -52,3 +50,11 @@ function start(a, b) {
 
 let [sum, mul, div] = start(10, 20);
 console.log(sum, mul, div);
+
+// Added a new example of array destructuring with nested array
+function getComplexData() {
+  return [1, [2, 3], 4];
+}
+
+let [num1, [num2, num3], num4] = getComplexData();
+console.log(num1, num2, num3, num4);

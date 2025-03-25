@@ -11,7 +11,6 @@ coba.name = "coba xxx";
 console.log(coba.name);
 
 // contoh di ES5
-
 function Person(name) {
   this.name = name;
 }
@@ -88,3 +87,60 @@ let meeting = {
 
 meeting.add("John").add("Jane").add("Jack");
 console.log(`Latest: ${meeting.latest}`);
+
+// New example with more advanced getter and setter
+class TemperatureConverter {
+  constructor(celsius) {
+    this._celsius = celsius;
+  }
+
+  get fahrenheit() {
+    return (this._celsius * 9/5) + 32;
+  }
+
+  set fahrenheit(value) {
+    this._celsius = (value - 32) * 5/9;
+  }
+
+  get celsius() {
+    return this._celsius;
+  }
+
+  set celsius(value) {
+    this._celsius = value;
+  }
+}
+
+const temp = new TemperatureConverter(25);
+console.log(`Celsius: ${temp.celsius}°C`);
+console.log(`Fahrenheit: ${temp.fahrenheit}°F`);
+
+temp.fahrenheit = 98.6;
+console.log(`Celsius after converting: ${temp.celsius}°C`);
+
+// Enhanced meeting object with additional methods
+const meetingRoom = {
+  attendance: [],
+  add(attendee) {
+    this.attendance.push(attendee);
+    return this;
+  },
+  remove(attendee) {
+    const index = this.attendance.indexOf(attendee);
+    if (index > -1) {
+      this.attendance.splice(index, 1);
+    }
+    return this;
+  },
+  get attendeeCount() {
+    return this.attendance.length;
+  },
+  get allAttendees() {
+    return [...this.attendance];
+  }
+};
+
+meetingRoom.add("Alice").add("Bob").add("Charlie");
+console.log(`Total attendees: ${meetingRoom.attendeeCount}`);
+meetingRoom.remove("Bob");
+console.log(`Attendees after removal: ${meetingRoom.allAttendees}`);
